@@ -36,3 +36,42 @@ exports.relatedRecipesController = async(req,res)=>{
     res.status(500).json(error)
   }
 }
+
+//add recipe
+exports.addRecipeController=async(req,res)=>{
+  console.log(" inside addRecipeController")
+    const{name,ingredients,instructions,prepTimeMinutes,cookTimeMinutes,servings,difficulty,image,mealType,cuisine,caloriesPerServing} = req.body
+    try {
+      const existingRecipeDetails=await recipes.findOne({name})
+      if (existingRecipeDetails) {
+      res.status(409).json("Recipe Already avialable in ur collectoin add another")
+      } else {
+          const newRecipe= new recipes({
+          name,ingredients,instructions,prepTimeMinutes,cookTimeMinutes,servings,difficulty,image,mealType,cuisine,caloriesPerServing
+        })
+        await newRecipe.save()
+        res.status(200).json(newRecipe)
+      }
+    } catch (error) {
+      res.status(500).json(error)
+    }
+}
+
+
+
+ //remove recipe
+  exports.removeRecipeController=async(req,res)=>{
+    console.log("inside removeRecipeController");
+    const{id}=req.params
+    try {
+      const removeItemDetails=await recipes.findByIdAndDelete({_id:id})
+                  res.status(200).json(removeItemDetails)
+
+    } catch (error) {
+            res.status(500).json(error)
+
+    }
+    
+  }
+
+

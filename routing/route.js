@@ -10,54 +10,54 @@ const adminMiddleware = require("../middleWare/adminJwtMiddleware")
 // --------------------------- user --------------------------------
 // register 
 
-routes.post('/register',userController.registerController)
+routes.post('/register', userController.registerController)
 
 // login 
-routes.post('/login',userController.loginController)
+routes.post('/login', userController.loginController)
 
 // get all user
-routes.get('/users',adminMiddleware,userController.getAllUsersController)
+routes.get('/users', adminMiddleware, userController.getAllUsersController)
 
 
 
 // update user profile
 
-routes.put('/user/:id/edit',jwtMiddleWare,userController.updateUSerController)
+routes.put('/user/:id/edit', jwtMiddleWare, userController.updateUSerController)
 
 // --------------------- recipie  -----------------------------------
 // get all recipies
 
-routes.get('/all-recipes',recipeController.getallRecipesController)
+routes.get('/all-recipes', recipeController.getallRecipesController)
 
 // vie recipe
-routes.get('/recipes/:id/view',jwtMiddleWare,recipeController.viewRecipeController)
+routes.get('/recipes/:id/view', jwtMiddleWare, recipeController.viewRecipeController)
 
 // related recipies
 
-routes.get('/related-recipes',jwtMiddleWare,recipeController.relatedRecipesController)
+routes.get('/related-recipes', jwtMiddleWare, recipeController.relatedRecipesController)
 
 // ----------------------------download -------------------------------
 
-routes.put('/recipes/:id/download',jwtMiddleWare,downloadController.addToDownloadController)
+routes.put('/recipes/:id/download', jwtMiddleWare, downloadController.addToDownloadController)
 
 // get user downld 
 
-routes.get('/recipe/download',jwtMiddleWare,downloadController.userDownloadedListController)
+routes.get('/recipe/download', jwtMiddleWare, downloadController.userDownloadedListController)
 
 // save recipe or colection 
 
-routes.post('/recipes/:id/save',jwtMiddleWare,saveRecipeController.addSaveRecipeController)
+routes.post('/recipes/:id/save', jwtMiddleWare, saveRecipeController.addSaveRecipeController)
 
 // get all save recipies
 
-routes.get('/recipes/save',jwtMiddleWare,saveRecipeController.getAllUserSaveRecipeController)
+routes.get('/recipes/save', jwtMiddleWare, saveRecipeController.getAllUserSaveRecipeController)
 // delet recipe
 
-routes.delete('/recipes/:id/remove',jwtMiddleWare,saveRecipeController.deleteRecipeController)
+routes.delete('/recipes/:id/remove', jwtMiddleWare, saveRecipeController.deleteRecipeController)
 
 // get all downloads  - admin 
 
-routes.get('/download',adminMiddleware,downloadController.getAllDownloadedListController)
+routes.get('/download', adminMiddleware, downloadController.getAllDownloadedListController)
 
 
 
@@ -65,20 +65,27 @@ routes.get('/download',adminMiddleware,downloadController.getAllDownloadedListCo
 //------------------------------- feed backs -------------------------------
 
 // add feedback
-routes.post('/user/feedback',feedbackController.addToFeedback)
+routes.post('/user/feedback', feedbackController.addToFeedback)
 
 // getfeedback 
 
-routes.get('/get/feedback',feedbackController.getAllFeedbacks)
+routes.get('/get/feedback', feedbackController.getAllFeedbacks)
 
 // get all feedback - admin
 
-routes.get('/feedback',adminMiddleware,feedbackController.getAllFeedBackListController)
+routes.get('/feedback', adminMiddleware, feedbackController.getAllFeedBackListController)
 
 // updat feedback status - admin
 
-routes.get('/feedback/:id/edit',adminMiddleware,feedbackController.updateStatusController)
+routes.get('/feedback/:id/edit', adminMiddleware, feedbackController.updateStatusController)
 
+
+//   add recipe,- admin
+
+routes.post('/recipes/add', adminMiddleware, recipeController.addRecipeController)
+// remove recipe
+
+routes.delete("/recipes/:id", adminMiddleware, recipeController.removeRecipeController)
 
 
 module.exports = routes
