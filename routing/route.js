@@ -57,7 +57,7 @@ routes.delete('/recipes/:id/remove', jwtMiddleWare, saveRecipeController.deleteR
 
 // get all downloads  - admin 
 
-routes.get('/download', adminMiddleware, downloadController.getAllDownloadedListController)
+routes.get('/download', jwtMiddleWare, downloadController.getAllDownloadedListController)
 
 
 
